@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://Viewtiful.github.io/sitemap.xml 
