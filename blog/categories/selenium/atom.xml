@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Selenium | Personal blog]]></title>
+  <link href="http://Viewtiful.github.io/blog/categories/selenium/atom.xml" rel="self"/>
+  <link href="http://Viewtiful.github.io/"/>
+  <updated>2014-08-29T17:54:27+02:00</updated>
+  <id>http://Viewtiful.github.io/</id>
+  <author>
+    <name><![CDATA[Baptiste]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using Selenium With Scala, Play Framework and Specs2]]></title>
+    <link href="http://Viewtiful.github.io/blog/2014/08/29/welcome-to-jekyll/"/>
+    <updated>2014-08-29T18:01:52+02:00</updated>
+    <id>http://Viewtiful.github.io/blog/2014/08/29/welcome-to-jekyll</id>
+    <content type="html"><![CDATA[<p>At work, I used Selenium when I had to build a tool for writting and running automated tests.</p>
+
+<p>I&rsquo;m currently playing around with the Play framework in Scala and I thought it would be nice to be able to execute tests with Selenium.
+I&rsquo;m using <a href="https://github.com/etorreborre/specs2">Specs2</a> as a testing framework and I wanted to use Selenium with it.</p>
+
+<p>So let&rsquo;s do it!</p>
+
+<hr />
+
+<h2>Adding Dependencies</h2>
+
+<p>First, we need to add the dependencies for Selenium (the current version is 2.42.0) in the build.sbt file :</p>
+
+<p><div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
+  <span class="o">&amp;</span><span class="n">hellip</span><span class="o">;</span>
+  <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">org</span><span class="o">.</span><span class="n">seleniumhq</span><span class="o">.</span><span class="n">selenium</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">selenium</span><span class="o">-</span><span class="n">java</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="mf">2.42</span><span class="o">.</span><span class="mi">0</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">test</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span>
+<span class="o">)</span></code></pre></div></p>
+
+<p>To test everything is alright, just use <em><code>sbt compile</code></em> or <em><code>activator compile</code></em> (depending on what you are using).</p>
+
+<hr />
+
+<h2>Writing a simple test using Selenium</h2>
+
+<p>Next step : Creating a simple test for our application(Write a Scala file in the <code>test</code> folder). The goal of this test is actually quite simple! Just launching firefox on our local application to ensure that everything is working.</p>
+
+<p>Here is the test :
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">import</span> <span class="nn">org.openqa.selenium.firefox.FirefoxDriver</span>
+<span class="k">import</span> <span class="nn">org.specs2.mutable.</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nn">org.specs2.runner.</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nn">org.junit.runner._&lt;/p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">import</span> <span class="nn">play.api.test.</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nn">play.api.test.Helpers.</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;@</span><span class="nc">RunWith</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">JUnitRunner</span><span class="o">])</span>
+<span class="k">class</span> <span class="nc">IntegrationSpec</span> <span class="k">extends</span> <span class="nc">Specification</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="nc">Application</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="n">should</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="s">&quot;work from within a browser&quot;</span> <span class="n">in</span> <span class="k">new</span> <span class="nc">WithBrowser</span><span class="o">(</span><span class="n">webDriver</span> <span class="k">=</span> <span class="nc">WebDriverFactory</span><span class="o">(</span><span class="nc">Helpers</span><span class="o">.</span><span class="nc">FIREFOX</span><span class="o">))</span> <span class="o">{</span>
+
+  <span class="n">browser</span><span class="o">.</span><span class="n">goTo</span><span class="o">(</span><span class="s">&quot;http://localhost:&quot;</span> <span class="o">+</span> <span class="n">port</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="o">}</span>
+<span class="o">}</span></code></pre></div></p>
+
+<hr />
+
+<h2>Running the test</h2>
+
+<p>Running the test is quite simple to, just use <em><code>sbt test</code></em> or <em><code>activator test</code></em>.</p>
+
+<p>The output should be similar to this :
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Loading</span> <span class="n">project</span> <span class="n">definition</span> <span class="n">from</span> <span class="o">/</span><span class="n">home</span><span class="o">/&amp;</span><span class="n">hellip</span><span class="o">;/</span><span class="nc">Scala</span><span class="o">/</span><span class="n">project</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">project</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Set</span> <span class="n">current</span> <span class="n">project</span> <span class="n">to</span> <span class="nc">Todo</span> <span class="o">(</span><span class="n">in</span> <span class="n">build</span> <span class="n">file</span><span class="o">:/</span><span class="n">home</span><span class="o">/&amp;</span><span class="n">hellip</span><span class="o">;/</span><span class="nc">Scala</span><span class="o">/</span><span class="n">project</span><span class="o">-</span><span class="n">name</span><span class="o">/)</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Application</span> <span class="n">should</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="o">+</span> <span class="n">work</span> <span class="n">from</span> <span class="n">within</span> <span class="n">a</span> <span class="n">browser</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Total</span> <span class="k">for</span> <span class="n">specification</span> <span class="nc">IntegrationSpec</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Finished</span> <span class="n">in</span> <span class="mi">7</span> <span class="n">seconds</span><span class="o">,</span> <span class="mi">16</span> <span class="n">ms</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="mi">1</span> <span class="n">example</span><span class="o">,</span> <span class="mi">0</span> <span class="n">failure</span><span class="o">,</span> <span class="mi">0</span> <span class="n">error</span>
+<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Passed</span><span class="k">:</span> <span class="kt">Total</span> <span class="err">1</span><span class="o">,</span> <span class="nc">Failed</span> <span class="mi">0</span><span class="o">,</span> <span class="nc">Errors</span> <span class="mi">0</span><span class="o">,</span> <span class="nc">Passed</span> <span class="mi">1</span>
+<span class="o">[</span><span class="kt">success</span><span class="o">]</span> <span class="nc">Total</span> <span class="n">time</span><span class="k">:</span> <span class="err">7</span> <span class="kt">s</span><span class="o">,</span> <span class="n">completed</span> <span class="mi">29</span> <span class="n">août</span> <span class="mi">2014</span> <span class="mi">16</span><span class="k">:</span><span class="err">45</span><span class="kt">:</span><span class="err">44</span></code></pre></div></p>
+
+<p>That&rsquo;s it! You should now be able to write tests that are executing in a browser.</p>
+]]></content>
+  </entry>
+  
+</feed>
