@@ -62,7 +62,7 @@ class IntegrationSpec extends Specification {
 Running the test
 ------
 
-Running the test is quite simple to, just use *`sbt test`* or *`activator test`*.
+Running the test is quite simple too, just use *`sbt test`* or *`activator test`*.
 
 The output should be similar to this :
 {% highlight scala %}
