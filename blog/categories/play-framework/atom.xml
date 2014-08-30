@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Play-framework | Personal blog]]></title>
   <link href="http://Viewtiful.github.io/blog/categories/play-framework/atom.xml" rel="self"/>
   <link href="http://Viewtiful.github.io/"/>
-  <updated>2014-08-29T17:54:27+02:00</updated>
+  <updated>2014-08-30T10:32:05+02:00</updated>
   <id>http://Viewtiful.github.io/</id>
   <author>
     <name><![CDATA[Baptiste]]></name>
@@ -71,7 +71,7 @@ I&rsquo;m using <a href="https://github.com/etorreborre/specs2">Specs2</a> as a 
 
 <h2>Running the test</h2>
 
-<p>Running the test is quite simple to, just use <em><code>sbt test</code></em> or <em><code>activator test</code></em>.</p>
+<p>Running the test is quite simple too, just use <em><code>sbt test</code></em> or <em><code>activator test</code></em>.</p>
 
 <p>The output should be similar to this :
 <div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
