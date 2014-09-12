@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Coffeescript | Personal blog]]></title>
   <link href="http://Viewtiful.github.io/blog/categories/coffeescript/atom.xml" rel="self"/>
   <link href="http://Viewtiful.github.io/"/>
-  <updated>2014-09-12T15:08:15+02:00</updated>
+  <updated>2014-09-12T15:21:16+02:00</updated>
   <id>http://Viewtiful.github.io/</id>
   <author>
     <name><![CDATA[Baptiste]]></name>
@@ -62,16 +62,16 @@ So I will explain how to use it this way. But there is many different ways to us
 <p>What is important in this snippet :</p>
 
 <p>Since we are using AngularJS, we need a controller that will handle the date and
-the popup date picker.
+the popup of the date picker.
 Mine is named <em><code>NewTodoCtrl</code></em>.</p>
 
 <p>Inside the input element :</p>
 
 <ul>
-<li>Adding a model which will contains the date populated by the date picker <em><code>data-ng-model=ntc.todo.end_time</code></em></li>
+<li>Adding a model which will contains the date populated by the date picker. The model is contained inside the controller. <em><code>data-ng-model=ntc.todo.end_time</code></em></li>
 <li><em><code>data-picker-popup</code></em> which is used to handle the date picker as a popup.
-The default format is used here but you can change it.</li>
-<li><em><code>data-is-open="opened"</code></em> is used to notify the view from the controller for opening the popup.</li>
+The default date format is used here but you can change it.</li>
+<li><em><code>data-is-open="opened"</code></em> The variable <em><code>opened</code></em> is used to notify the view from the controller for opening the popup.</li>
 </ul>
 
 
@@ -80,9 +80,8 @@ The controller will then modify the opened variable to <em><code>true</code></em
 
 <h2>The controller</h2>
 
-<p>The controller is pretty simple, we just initialize the date corresponding to the <em><code>data-ng-model</code></em> in the constructor.</p>
-
-<p>A function <em><code>open</code></em> is used to open the popup containing the date picker.
+<p>The controller is pretty simple, we just initialize the date used as the model in the constructor and corresponding to the <em><code>data-ng-model</code></em> in the view.
+A function <em><code>open</code></em> is used to open the popup containing the date picker.
 We use the <em><code>$scope</code></em> to modify the <em><code>opened</code></em> variable from the view and <em><code>$timeout</code></em>
 to delay the execution with the default timeout of the navigator.</p>
 
