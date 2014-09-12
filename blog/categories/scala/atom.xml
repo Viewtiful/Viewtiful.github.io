@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scala | Personal blog]]></title>
   <link href="http://Viewtiful.github.io/blog/categories/scala/atom.xml" rel="self"/>
   <link href="http://Viewtiful.github.io/"/>
-  <updated>2014-09-12T15:21:16+02:00</updated>
+  <updated>2014-09-12T15:24:11+02:00</updated>
   <id>http://Viewtiful.github.io/</id>
   <author>
     <name><![CDATA[Baptiste]]></name>
@@ -95,9 +95,8 @@ to delay the execution with the default timeout of the navigator.</p>
 <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nv">open: </span><span class="nf">() -&gt;</span>
    <span class="nx">@$log</span><span class="p">.</span><span class="nx">debug</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Opening</span> <span class="nx">the</span> <span class="nx">date</span> <span class="nx">picker</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;</span>
    <span class="nx">@$timeout</span> <span class="p">(</span><span class="nf">=&gt;</span>
-     <span class="vi">@$scope.opened = </span><span class="kc">true</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span></code></pre></div></p>
+     <span class="vi">@$scope.opened = </span><span class="kc">true</span>
+   <span class="p">)</span></code></pre></div></p>
 
 <p>With all of this, you should now have an input element that contains the current
 date selected from a popup date picker.</p>

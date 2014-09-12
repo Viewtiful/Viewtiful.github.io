@@ -4,7 +4,7 @@
   <title><![CDATA[Personal blog]]></title>
   <link href="http://Viewtiful.github.io/atom.xml" rel="self"/>
   <link href="http://Viewtiful.github.io/"/>
-  <updated>2014-09-12T15:21:16+02:00</updated>
+  <updated>2014-09-12T15:24:11+02:00</updated>
   <id>http://Viewtiful.github.io/</id>
   <author>
     <name><![CDATA[Baptiste]]></name>
@@ -92,7 +92,8 @@ to delay the execution with the default timeout of the navigator.</p>
   <span class="nv">open: </span><span class="nf">() -&gt;</span>
    <span class="nx">@$log</span><span class="p">.</span><span class="nx">debug</span> <span class="s">&quot;Opening the date picker&quot;</span>
    <span class="nx">@$timeout</span> <span class="p">(</span><span class="nf">=&gt;</span>
-     <span class="vi">@$scope.opened = </span><span class="kc">true</span></code></pre></div>
+     <span class="vi">@$scope.opened = </span><span class="kc">true</span>
+   <span class="p">)</span></code></pre></div>
 
 
 <p>With all of this, you should now have an input element that contains the current
