@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Personal blog</title>
+  <title>Using AngularJS UI Datepicker With CoffeeScript - Personal blog</title>
   <meta name="author" content="Baptiste">
 
   
@@ -19,7 +19,7 @@ I wanted to add a date picker for the expected end date of a todo. Good &hellip;
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Viewtiful.github.io">
+  <link rel="canonical" href="http://Viewtiful.github.io/blog/2014/09/12/using-angularjs-ui-datepicker-with-coffeescript">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Personal blog" type="application/atom+xml">
@@ -64,15 +64,12 @@ I wanted to add a date picker for the expected end date of a todo. Good &hellip;
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/12/using-angularjs-ui-datepicker-with-coffeescript/">Using AngularJS UI Datepicker With CoffeeScript</a></h1>
+      <h1 class="entry-title">Using AngularJS UI Datepicker With CoffeeScript</h1>
     
     
       <p class="meta">
@@ -88,7 +85,7 @@ I wanted to add a date picker for the expected end date of a todo. Good &hellip;
   </header>
 
 
-  <div class="entry-content"><p>I&rsquo;m currently playing around and building a simple todo application and
+<div class="entry-content"><p>I&rsquo;m currently playing around and building a simple todo application and
 I wanted to add a date picker for the expected end date of a todo.</p>
 
 <p>Good thing <a href="http://angular-ui.github.io/bootstrap/">AngularUI Bootstrap</a> proposes one!
@@ -179,118 +176,52 @@ date selected from a popup date picker.</p>
 
 <p>You can test the example as a JSFiddle : <a href="http://jsfiddle.net/bXFdM/106/">here</a></p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Baptiste</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-09-12T10:55:48+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:55 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/angularjs/'>angularjs</a>, <a class='category' href='/blog/categories/coffeescript/'>coffeescript</a>, <a class='category' href='/blog/categories/play-framework/'>play-framework</a>, <a class='category' href='/blog/categories/scala/'>scala</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/29/welcome-to-jekyll/">Using Selenium With Scala, Play Framework and Specs2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-08-29T18:01:52+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:01 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At work, I used Selenium when I had to build a tool for writting and running automated tests.</p>
-
-<p>I&rsquo;m currently playing around with the Play framework in Scala and I thought it would be nice to be able to execute tests with Selenium.
-I&rsquo;m using <a href="https://github.com/etorreborre/specs2">Specs2</a> as a testing framework and I wanted to use Selenium with it.</p>
-
-<p>So let&rsquo;s do it!</p>
-
-<hr />
-
-<h2>Adding Dependencies</h2>
-
-<p>First, we need to add the dependencies for Selenium (the current version is 2.42.0) in the build.sbt file :</p>
-
-<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
-  <span class="o">...</span>
-  <span class="s">&quot;org.seleniumhq.selenium&quot;</span> <span class="o">%</span> <span class="s">&quot;selenium-java&quot;</span> <span class="o">%</span> <span class="s">&quot;2.42.0&quot;</span> <span class="o">%</span> <span class="s">&quot;test&quot;</span>
-<span class="o">)</span></code></pre></div>
-
-
-<p>To test everything is alright, just use <em><code>sbt compile</code></em> or <em><code>activator compile</code></em> (depending on what you are using).</p>
-
-<hr />
-
-<h2>Writing a simple test using Selenium</h2>
-
-<p>Next step : Creating a simple test for our application(Write a Scala file in the <code>test</code> folder). The goal of this test is actually quite simple! Just launching firefox on our local application to ensure that everything is working.</p>
-
-<p>Here is the test :</p>
-
-<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="k">import</span> <span class="nn">org.openqa.selenium.firefox.FirefoxDriver</span>
-<span class="k">import</span> <span class="nn">org.specs2.mutable._</span>
-<span class="k">import</span> <span class="nn">org.specs2.runner._</span>
-<span class="k">import</span> <span class="nn">org.junit.runner._</span>
-
-<span class="k">import</span> <span class="nn">play.api.test._</span>
-<span class="k">import</span> <span class="nn">play.api.test.Helpers._</span>
-
-<span class="nd">@RunWith</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">JUnitRunner</span><span class="o">])</span>
-<span class="k">class</span> <span class="nc">IntegrationSpec</span> <span class="k">extends</span> <span class="nc">Specification</span> <span class="o">{</span>
-
-  <span class="s">&quot;Application&quot;</span> <span class="n">should</span> <span class="o">{</span>
-
-    <span class="s">&quot;work from within a browser&quot;</span> <span class="n">in</span> <span class="k">new</span> <span class="nc">WithBrowser</span><span class="o">(</span><span class="n">webDriver</span> <span class="k">=</span> <span class="nc">WebDriverFactory</span><span class="o">(</span><span class="nc">Helpers</span><span class="o">.</span><span class="nc">FIREFOX</span><span class="o">))</span> <span class="o">{</span>
-
-      <span class="n">browser</span><span class="o">.</span><span class="n">goTo</span><span class="o">(</span><span class="s">&quot;http://localhost:&quot;</span> <span class="o">+</span> <span class="n">port</span><span class="o">)</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
-
-
-<hr />
-
-<h2>Running the test</h2>
-
-<p>Running the test is quite simple too, just use <em><code>sbt test</code></em> or <em><code>activator test</code></em>.</p>
-
-<p>The output should be similar to this :</p>
-
-<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Loading</span> <span class="n">project</span> <span class="n">definition</span> <span class="n">from</span> <span class="o">/</span><span class="n">home</span><span class="o">/.../</span><span class="nc">Scala</span><span class="o">/</span><span class="n">project</span><span class="o">-</span><span class="n">name</span><span class="o">/</span><span class="n">project</span>
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Set</span> <span class="n">current</span> <span class="n">project</span> <span class="n">to</span> <span class="nc">Todo</span> <span class="o">(</span><span class="n">in</span> <span class="n">build</span> <span class="n">file</span><span class="o">:/</span><span class="n">home</span><span class="o">/.../</span><span class="nc">Scala</span><span class="o">/</span><span class="n">project</span><span class="o">-</span><span class="n">name</span><span class="o">/)</span>
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> 
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Application</span> <span class="n">should</span>
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="o">+</span> <span class="n">work</span> <span class="n">from</span> <span class="n">within</span> <span class="n">a</span> <span class="n">browser</span>
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> 
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Total</span> <span class="k">for</span> <span class="n">specification</span> <span class="nc">IntegrationSpec</span>
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Finished</span> <span class="n">in</span> <span class="mi">7</span> <span class="n">seconds</span><span class="o">,</span> <span class="mi">16</span> <span class="n">ms</span>
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="mi">1</span> <span class="n">example</span><span class="o">,</span> <span class="mi">0</span> <span class="n">failure</span><span class="o">,</span> <span class="mi">0</span> <span class="n">error</span>
-<span class="o">[</span><span class="kt">info</span><span class="o">]</span> <span class="nc">Passed</span><span class="k">:</span> <span class="kt">Total</span> <span class="err">1</span><span class="o">,</span> <span class="nc">Failed</span> <span class="mi">0</span><span class="o">,</span> <span class="nc">Errors</span> <span class="mi">0</span><span class="o">,</span> <span class="nc">Passed</span> <span class="mi">1</span>
-<span class="o">[</span><span class="kt">success</span><span class="o">]</span> <span class="nc">Total</span> <span class="n">time</span><span class="k">:</span> <span class="err">7</span> <span class="kt">s</span><span class="o">,</span> <span class="n">completed</span> <span class="mi">29</span> <span class="n">août</span> <span class="mi">2014</span> <span class="mi">16</span><span class="k">:</span><span class="err">45</span><span class="kt">:</span><span class="err">44</span></code></pre></div>
-
-
-<p>That&rsquo;s it! You should now be able to write tests that are executing in a browser.</p>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Viewtiful.github.io/blog/2014/09/12/using-angularjs-ui-datepicker-with-coffeescript/" data-via="" data-counturl="http://Viewtiful.github.io/blog/2014/09/12/using-angularjs-ui-datepicker-with-coffeescript/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/08/29/welcome-to-jekyll/" title="Previous Post: Using Selenium with Scala, play framework and specs2">&laquo; Using Selenium with Scala, play framework and specs2</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -314,6 +245,7 @@ I&rsquo;m using <a href="https://github.com/etorreborre/specs2">Specs2</a> as a 
 
   
 </aside>
+
 
     </div>
   </div>

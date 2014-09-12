@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Coffeescript | Personal blog]]></title>
+  <link href="http://Viewtiful.github.io/blog/categories/coffeescript/atom.xml" rel="self"/>
+  <link href="http://Viewtiful.github.io/"/>
+  <updated>2014-09-12T15:08:15+02:00</updated>
+  <id>http://Viewtiful.github.io/</id>
+  <author>
+    <name><![CDATA[Baptiste]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using AngularJS UI Datepicker With CoffeeScript]]></title>
+    <link href="http://Viewtiful.github.io/blog/2014/09/12/using-angularjs-ui-datepicker-with-coffeescript/"/>
+    <updated>2014-09-12T10:55:48+02:00</updated>
+    <id>http://Viewtiful.github.io/blog/2014/09/12/using-angularjs-ui-datepicker-with-coffeescript</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m currently playing around and building a simple todo application and
+I wanted to add a date picker for the expected end date of a todo.</p>
+
+<p>Good thing <a href="http://angular-ui.github.io/bootstrap/">AngularUI Bootstrap</a> proposes one!
+Here is a screenshot</p>
+
+<p><img class="center" src="/assets/posts_images/datepicker.png" title="The date picker from AngularUI" ></p>
+
+<p>I chose to use it as a popup when clicking on a button at the right of the input element.
+So I will explain how to use it this way. But there is many different ways to use it demonstrated in the documentation.</p>
+
+<h2>The HTML</h2>
+
+<p>First thing first, we need to add the necessary html for displaying the date picker.</p>
+
+<p>Here is the corresponding stripped html :
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">&quot;NewTodoCtrl as ntc&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">id=</span><span class="s">&quot;label_end_time&quot;</span> <span class="na">for=</span><span class="s">&quot;end_time&quot;</span> <span class="na">class=</span><span class="s">&quot;control-label&quot;</span><span class="nt">&gt;</span>End date<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input-group&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span> <span class="na">id=</span><span class="s">&quot;end_time&quot;</span> <span class="na">name=</span><span class="s">&quot;end_time&quot;</span>
+            <span class="na">placeholder=</span><span class="s">&quot;End date&quot;</span> <span class="na">data-ng-model=</span><span class="s">&quot;ntc.todo.end_time&quot;</span> 
+            <span class="na">data-datepicker-popup=</span><span class="s">&quot;&quot;</span> <span class="na">data-is-open=</span><span class="s">&quot;opened&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;input-group-btn&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-default&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;ntc.open()&quot;</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">&quot;glyphicon glyphicon-calendar&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;/button&gt;</span>
+          <span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+
+<span class="nt">&lt;p&gt;</span></code></pre></div></p>
+
+<p>You should see something similar to this :</p>
+
+<p><img class="center" src="/assets/posts_images/html_picker.png"></p>
+
+<p>What is important in this snippet :</p>
+
+<p>Since we are using AngularJS, we need a controller that will handle the date and
+the popup date picker.
+Mine is named <em><code>NewTodoCtrl</code></em>.</p>
+
+<p>Inside the input element :</p>
+
+<ul>
+<li>Adding a model which will contains the date populated by the date picker <em><code>data-ng-model=ntc.todo.end_time</code></em></li>
+<li><em><code>data-picker-popup</code></em> which is used to handle the date picker as a popup.
+The default format is used here but you can change it.</li>
+<li><em><code>data-is-open="opened"</code></em> is used to notify the view from the controller for opening the popup.</li>
+</ul>
+
+
+<p>The calendar button next to the input element is calling an <em><code>open</code></em> function contained in the controller.
+The controller will then modify the opened variable to <em><code>true</code></em> for displaying the popup.</p>
+
+<h2>The controller</h2>
+
+<p>The controller is pretty simple, we just initialize the date corresponding to the <em><code>data-ng-model</code></em> in the constructor.</p>
+
+<p>A function <em><code>open</code></em> is used to open the popup containing the date picker.
+We use the <em><code>$scope</code></em> to modify the <em><code>opened</code></em> variable from the view and <em><code>$timeout</code></em>
+to delay the execution with the default timeout of the navigator.</p>
+
+<p><div class="highlight"><pre><code class="language-coffeescript" data-lang="coffeescript"><span class="k">class</span> <span class="nx">NewTodoCtrl</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nv">constructor: </span><span class="nf">(@$scope, @$log, @$timeout) -&gt;</span>
+   <span class="nx">@$log</span><span class="p">.</span><span class="nx">debug</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">constructing</span> <span class="nx">NewTodoCtrl</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;</span>
+   <span class="vi">@todo = </span><span class="p">{}</span>
+   <span class="vi">@todo.end_time = </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="nv">open: </span><span class="nf">() -&gt;</span>
+   <span class="nx">@$log</span><span class="p">.</span><span class="nx">debug</span> <span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Opening</span> <span class="nx">the</span> <span class="nx">date</span> <span class="nx">picker</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;</span>
+   <span class="nx">@$timeout</span> <span class="p">(</span><span class="nf">=&gt;</span>
+     <span class="vi">@$scope.opened = </span><span class="kc">true</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span></code></pre></div></p>
+
+<p>With all of this, you should now have an input element that contains the current
+date selected from a popup date picker.</p>
+
+<p>Current date by default in the input :</p>
+
+<p><img class="center" src="/assets/posts_images/html_picker2.png"></p>
+
+<p>When clicking on the calendar icon, the popup date picker is displayed :</p>
+
+<p><img class="center" src="/assets/posts_images/html_picker3.png"></p>
+
+<p>You can test the example as a JSFiddle : <a href="http://jsfiddle.net/bXFdM/106/">here</a></p>
+]]></content>
+  </entry>
+  
+</feed>
