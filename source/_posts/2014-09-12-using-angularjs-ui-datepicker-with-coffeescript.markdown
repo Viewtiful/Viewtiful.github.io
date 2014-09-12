@@ -48,15 +48,15 @@ You should see something similar to this :
 What is important in this snippet :
 
 Since we are using AngularJS, we need a controller that will handle the date and
-the popup date picker.
+the popup of the date picker.
 Mine is named *`NewTodoCtrl`*.
 
 Inside the input element :
   
-  + Adding a model which will contains the date populated by the date picker *`data-ng-model=ntc.todo.end_time`*
+  + Adding a model which will contains the date populated by the date picker. The model is contained inside the controller. *`data-ng-model=ntc.todo.end_time`*
   + *`data-picker-popup`* which is used to handle the date picker as a popup.
-  The default format is used here but you can change it.
-  + *`data-is-open="opened"`* is used to notify the view from the controller for opening the popup.
+  The default date format is used here but you can change it.
+  + *`data-is-open="opened"`* The variable *`opened`* is used to notify the view from the controller for opening the popup.
 
 The calendar button next to the input element is calling an *`open`* function contained in the controller.
 The controller will then modify the opened variable to *`true`* for displaying the popup.
@@ -64,8 +64,7 @@ The controller will then modify the opened variable to *`true`* for displaying t
 The controller
 ------
 
-The controller is pretty simple, we just initialize the date corresponding to the *`data-ng-model`* in the constructor.
-
+The controller is pretty simple, we just initialize the date used as the model in the constructor and corresponding to the *`data-ng-model`* in the view.
 A function *`open`* is used to open the popup containing the date picker.
 We use the *`$scope`* to modify the *`opened`* variable from the view and *`$timeout`*
 to delay the execution with the default timeout of the navigator.
