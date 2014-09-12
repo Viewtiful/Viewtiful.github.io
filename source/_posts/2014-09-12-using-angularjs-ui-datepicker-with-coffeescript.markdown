@@ -81,7 +81,7 @@ class NewTodoCtrl
    @$log.debug "Opening the date picker"
    @$timeout (=>
      @$scope.opened = true
-    
+   ) 
 {% endhighlight %}
 
 With all of this, you should now have an input element that contains the current
