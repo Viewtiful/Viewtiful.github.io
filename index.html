@@ -129,7 +129,7 @@ Unfortunately, part of this ID is random but one part is always the same and cor
 Indeed the last part of <em><code>datepicker-008-6172-9</code></em> correspond to the day, here it is <em><code>9</code></em>.
 So we can use this as the pattern for selecting the day we want!</p>
 
-<p>The following snippet contains the code for selecting the <em><code>td</code></em> element corresponding to the 9th day of the current month. Find the button inside the <em><code>td</code></em> and clicking on it.</p>
+<p>The following snippet contains the code for selecting the <em><code>td</code></em> element corresponding to the 9th day of the current month.</p>
 
 <div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">browser</span><span class="o">.</span><span class="n">$</span><span class="o">(</span><span class="s">&quot;td&quot;</span><span class="o">,</span> <span class="n">withId</span><span class="o">().</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;-9&quot;</span><span class="o">)).</span><span class="n">find</span><span class="o">(</span><span class="s">&quot;button&quot;</span><span class="o">).</span><span class="n">click</span><span class="o">()</span></code></pre></div>
 
