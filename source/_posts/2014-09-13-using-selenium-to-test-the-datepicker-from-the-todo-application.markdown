@@ -21,10 +21,10 @@ But what interest us here is this part :
 
 {% img center /assets/posts_images/todo_selenium_test2.png The date picker part on the test %}
 
-So the point of this part of the test is to be able to select the 9th of the current month from this date picker.
+So the point of this part of the test is to be able to select the 9th of the current month from the date picker.
 
 First step is to open the popup date picker, pretty simple I added an ID to the button for opening the date picker.
-The correspond code for the test just need to find the ID and click on the button (I'm using *`FluentLenium`*) :
+The corresponding code for the test just need to find the ID and click on the button (I'm using *`FluentLenium`*) :
 {% highlight scala %}
 browser.$("#date-picker").click()
 {% endhighlight %}
