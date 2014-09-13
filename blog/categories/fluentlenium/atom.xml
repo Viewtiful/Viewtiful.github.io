@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Fluentlenium | Personal blog]]></title>
   <link href="http://Viewtiful.github.io/blog/categories/fluentlenium/atom.xml" rel="self"/>
   <link href="http://Viewtiful.github.io/"/>
-  <updated>2014-09-13T19:31:06+02:00</updated>
+  <updated>2014-09-13T19:48:27+02:00</updated>
   <id>http://Viewtiful.github.io/</id>
   <author>
     <name><![CDATA[Baptiste]]></name>
@@ -32,10 +32,10 @@ So the general goal of the test in my application is as follow :</p>
 
 <p><img class="center" src="/assets/posts_images/todo_selenium_test2.png" title="The date picker part on the test" ></p>
 
-<p>So the point of this part of the test is to be able to select the 9th of the current month from this date picker.</p>
+<p>So the point of this part of the test is to be able to select the 9th of the current month from the date picker.</p>
 
 <p>First step is to open the popup date picker, pretty simple I added an ID to the button for opening the date picker.
-The correspond code for the test just need to find the ID and click on the button (I&rsquo;m using <em><code>FluentLenium</code></em>) :
+The corresponding code for the test just need to find the ID and click on the button (I&rsquo;m using <em><code>FluentLenium</code></em>) :
 <div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">browser</span><span class="o">.</span><span class="n">$</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="k">#</span><span class="n">date</span><span class="o">-</span><span class="n">picker</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;).</span><span class="n">click</span><span class="o">()</span></code></pre></div></p>
 
 <p>Now the interesting part, in order to select the 9th we need to find a way to click on this day in the date picker.</p>
