@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Using Selenium to Test the AngularUI Datepicker From the Todo Application - Personal blog</title>
+  <meta name="author" content="Baptiste">
+
+  
+  <meta name="description" content="In the last post I added a date picker to my todo application which is built using Play framework in Scala and AngularJS.
+Just to remember, here is a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Viewtiful.github.io/blog/2014/09/13/using-selenium-to-test-the-datepicker-from-the-todo-application">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Personal blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Personal blog</a></h1>
+  
+    <h2>Just sharing stuff.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Viewtiful.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Using Selenium to Test the AngularUI Datepicker From the Todo Application</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-13T16:32:56+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:32 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In the last post I added a date picker to my todo application which is built using Play framework in Scala and AngularJS.
+Just to remember, here is a screenshot of the date picker :</p>
+
+<p><img class="center" src="/assets/posts_images/datepicker.png" title="The date picker from AngularUI" ></p>
+
+<p>What would be nice is to test it with Selenium.
+So the general goal of the test in my application is as follow :</p>
+
+<p><img class="center" src="/assets/posts_images/todo_selenium_test.png" title="General goal of the test for the todo application" ></p>
+
+<p>But what interest us here is this part :</p>
+
+<p><img class="center" src="/assets/posts_images/todo_selenium_test2.png" title="The date picker part on the test" ></p>
+
+<p>So the point of this part of the test is to be able to select the 9th of the current month from this date picker.</p>
+
+<p>First step is to open the popup date picker, pretty simple I added an ID to the button for opening the date picker.
+The correspond code for the test just need to find the ID and click on the button (I&rsquo;m using <em><code>FluentLenium</code></em>) :</p>
+
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">browser</span><span class="o">.</span><span class="n">$</span><span class="o">(</span><span class="s">&quot;#date-picker&quot;</span><span class="o">).</span><span class="n">click</span><span class="o">()</span></code></pre></div>
+
+
+<p>Now the interesting part, in order to select the 9th we need to find a way to click on this day in the date picker.</p>
+
+<p>The first thing to check is the html generated for the 9th of the month button.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;td</span> <span class="na">id=</span><span class="s">&quot;datepicker-008-6172-9&quot;</span> <span class="na">class=</span><span class="s">&quot;text-center ng-scope&quot;</span> <span class="na">aria-disabled=</span><span class="s">&quot;false&quot;</span> <span class="na">role=</span><span class="s">&quot;gridcell&quot;</span> <span class="na">ng-repeat=</span><span class="s">&quot;dt in row track by dt.date&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;btn btn-default btn-sm&quot;</span> <span class="na">tabindex=</span><span class="s">&quot;-1&quot;</span> <span class="na">ng-disabled=</span><span class="s">&quot;dt.disabled&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;select(dt.date)&quot;</span> <span class="na">ng-class=</span><span class="s">&quot;{&#39;btn-info&#39;: dt.selected, active: isActive(dt)}&quot;</span> <span class="na">style=</span><span class="s">&quot;width:100%;&quot;</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;ng-binding&quot;</span> <span class="na">ng-class=</span><span class="s">&quot;{&#39;text-muted&#39;: dt.secondary, &#39;text-info&#39;: dt.current}&quot;</span><span class="nt">&gt;</span>
+       09
+     <span class="nt">&lt;/span&gt;</span>
+   <span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/td&gt;</span></code></pre></div>
+
+
+<p>In this html, we need to find a unique pattern for selecting the 9th button.
+As you can see, the <em><code>td</code></em> element has an ID. So we could use it directly.
+Unfortunately, part of this ID is random but one part is always the same and correspond to the day of the month, so we can actually use this part.
+Indeed the last part of <em><code>datepicker-008-6172-9</code></em> correspond to the day, here it is <em><code>9</code></em>.
+So we can use this as the pattern for selecting the day we want!</p>
+
+<p>The following snippet contains the code for selecting the <em><code>td</code></em> element corresponding to the 9th day of the current month. Find the button inside the <em><code>td</code></em> and clicking on it.</p>
+
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">browser</span><span class="o">.</span><span class="n">$</span><span class="o">(</span><span class="s">&quot;td&quot;</span><span class="o">,</span> <span class="n">withId</span><span class="o">().</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;-9&quot;</span><span class="o">)).</span><span class="n">find</span><span class="o">(</span><span class="s">&quot;button&quot;</span><span class="o">).</span><span class="n">click</span><span class="o">()</span></code></pre></div>
+
+
+<p>Explanation of the snippet :</p>
+
+<p>In Play framework, <em><code>$</code></em> correspond to the <em><code>find</code></em> method in <em><code>FluentLenium</code></em> for searching element.
+So basically, the snippet mean : Find a <em><code>td</code></em> element with an ID containing <em><code>-9</code></em>. Inside this element search for a <em><code>button</code></em> and click on it.</p>
+
+<p>Here is what the test looks like with selenium in action :</p>
+
+<p><img class="center" src="/assets/posts_images/datepicker_selenium.gif" title="General goal of the test for the todo application" ></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Baptiste</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-09-13T16:32:56+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:32 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/angularui/'>angularui</a>, <a class='category' href='/blog/categories/fluentlenium/'>fluentlenium</a>, <a class='category' href='/blog/categories/play-framework/'>play-framework</a>, <a class='category' href='/blog/categories/scala/'>scala</a>, <a class='category' href='/blog/categories/selenium/'>selenium</a>, <a class='category' href='/blog/categories/specs2/'>specs2</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Viewtiful.github.io/blog/2014/09/13/using-selenium-to-test-the-datepicker-from-the-todo-application/" data-via="" data-counturl="http://Viewtiful.github.io/blog/2014/09/13/using-selenium-to-test-the-datepicker-from-the-todo-application/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/12/using-angularjs-ui-datepicker-with-coffeescript/" title="Previous Post: Using AngularJS UI Datepicker with CoffeeScript">&laquo; Using AngularJS UI Datepicker with CoffeeScript</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/09/13/using-selenium-to-test-the-datepicker-from-the-todo-application/">Using Selenium to Test the AngularUI Datepicker From the Todo Application</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/12/using-angularjs-ui-datepicker-with-coffeescript/">Using AngularJS UI Datepicker With CoffeeScript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/29/welcome-to-jekyll/">Using Selenium With Scala, Play Framework and Specs2</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Baptiste -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
