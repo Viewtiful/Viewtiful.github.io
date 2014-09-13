@@ -48,7 +48,7 @@ Unfortunately, part of this ID is random but one part is always the same and cor
 Indeed the last part of *`datepicker-008-6172-9`* correspond to the day, here it is *`9`*.
 So we can use this as the pattern for selecting the day we want!
 
-The following snippet contains the code for selecting the *`td`* element corresponding to the 9th day of the current month. Find the button inside the *`td`* and clicking on it.
+The following snippet contains the code for selecting the *`td`* element corresponding to the 9th day of the current month.
 {% highlight scala %}
 browser.$("td", withId().contains("-9")).find("button").click()
 {% endhighlight %}
