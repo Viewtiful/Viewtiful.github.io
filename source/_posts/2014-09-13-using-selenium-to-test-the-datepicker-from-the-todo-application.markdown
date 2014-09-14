@@ -58,6 +58,6 @@ Explanation of the snippet :
 In Play framework, *`$`* correspond to the *`find`* method in *`FluentLenium`* for searching element.
 So basically, the snippet mean : Find a *`td`* element with an ID containing *`-9`*. Inside this element search for a *`button`* and click on it.
 
-Here is what the test looks like with selenium in action :
+Here is what the general test looks like with selenium in action :
 
-{% img center /assets/posts_images/datepicker_selenium.gif General goal of the test for the todo application %}
+{% img center /assets/posts_images/datepicker_selenium.gif Execution of the general test with Selenium %}
