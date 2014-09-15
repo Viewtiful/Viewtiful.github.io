@@ -2,6 +2,7 @@
 layout: post
 title:  "Using Selenium with Scala, play framework and specs2"
 date:   2014-08-29 16:01:52
+comments: true
 categories: scala play-framework specs2 selenium
 ---
 At work, I used Selenium when I had to build a tool for writting and running automated tests.
