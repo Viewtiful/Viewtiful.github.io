@@ -12,8 +12,6 @@ I'm using [Specs2][specs2] as a testing framework and I wanted to use Selenium w
 
 So let's do it!
 
-***
-
 Adding Dependencies
 ------
 
@@ -27,8 +25,6 @@ libraryDependencies ++= Seq(
 {% endhighlight %}
 
 To test everything is alright, just use *`sbt compile`* or *`activator compile`* (depending on what you are using).
-
-***
 
 Writing a simple test using Selenium
 ------
@@ -57,8 +53,6 @@ class IntegrationSpec extends Specification {
   }
 }
 {% endhighlight %}
-
-***
 
 Running the test
 ------
