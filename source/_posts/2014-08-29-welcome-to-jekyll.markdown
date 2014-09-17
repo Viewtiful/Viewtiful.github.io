@@ -15,12 +15,12 @@ So let's do it!
 Adding Dependencies
 ------
 
-First, we need to add the dependencies for Selenium (the current version is 2.42.0) in the build.sbt file :
+First, we need to add the dependencies for Selenium (the current version is 2.43.1) in the build.sbt file :
 
 {% highlight scala %}
 libraryDependencies ++= Seq(
   ...
-  "org.seleniumhq.selenium" % "selenium-java" % "2.42.0" % "test"
+  "org.seleniumhq.selenium" % "selenium-java" % "2.43.1" % "test"
 )
 {% endhighlight %}
 
