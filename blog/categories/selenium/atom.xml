@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Selenium | Personal blog]]></title>
   <link href="http://Viewtiful.github.io/blog/categories/selenium/atom.xml" rel="self"/>
   <link href="http://Viewtiful.github.io/"/>
-  <updated>2014-09-16T23:18:42+02:00</updated>
+  <updated>2014-09-17T20:51:04+02:00</updated>
   <id>http://Viewtiful.github.io/</id>
   <author>
     <name><![CDATA[Baptiste]]></name>
@@ -83,11 +83,11 @@ I&rsquo;m using <a href="https://github.com/etorreborre/specs2">Specs2</a> as a 
 
 <h2>Adding Dependencies</h2>
 
-<p>First, we need to add the dependencies for Selenium (the current version is 2.42.0) in the build.sbt file :</p>
+<p>First, we need to add the dependencies for Selenium (the current version is 2.43.1) in the build.sbt file :</p>
 
 <p><div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">libraryDependencies</span> <span class="o">++=</span> <span class="nc">Seq</span><span class="o">(</span>
   <span class="o">&amp;</span><span class="n">hellip</span><span class="o">;</span>
-  <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">org</span><span class="o">.</span><span class="n">seleniumhq</span><span class="o">.</span><span class="n">selenium</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">selenium</span><span class="o">-</span><span class="n">java</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="mf">2.42</span><span class="o">.</span><span class="mi">0</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">test</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span>
+  <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">org</span><span class="o">.</span><span class="n">seleniumhq</span><span class="o">.</span><span class="n">selenium</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">selenium</span><span class="o">-</span><span class="n">java</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="mf">2.43</span><span class="o">.</span><span class="mi">1</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span> <span class="o">%</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">test</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;</span>
 <span class="o">)</span></code></pre></div></p>
 
 <p>To test everything is alright, just use <em><code>sbt compile</code></em> or <em><code>activator compile</code></em> (depending on what you are using).</p>
